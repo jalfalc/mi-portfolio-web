@@ -1,0 +1,43 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+
+const EXPERIENCE = [
+  {
+    date: "Abril 2025 - Junio 2025",
+    title: "Desarrollador web frontend -  Contrato de prácticas",
+    company: "Avocoding S.L.",
+    description:
+      "Participación en la creación del sitio web de la empresa basado en una SPA desarrollada con React y Typescript.",
+    tasks: [
+      "Participación en el desarrollo de un proyecto web con React, aplicando principios de diseño modular y reutilización de componentes.",
+      "Configuración e integración de herramientas de control de estilo y calidad de código: ESLint, Stylelint, Prettier y Husky.",
+      "Implementación de efectos visuales y animaciones utilizando GSAP y ReactBits.",
+      "Desarrollo de interfaces con HeroUI, empleando su sistema de componentes.",
+      "Creación de componentes personalizados, custom hooks y uso de React Context para la gestión de estado y lógica compartida.",
+      "Trabajo en equipo bajo metodología Scrum, con sprints de 14 días y reuniones de seguimiento.",
+      "Revisión y evaluación de pull requests de compañeros, comprobando el uso de buenas prácticas y un correcto funcionamiento.",
+    ],
+    technologies: [
+      "React",
+      "Typescript",
+      "Sass",
+      "Gsap",
+      "HeroUI",
+      "ESLint",
+      "Prettier",
+      "Husky",
+      "Git",
+    ],
+  },
+];
+---
+
+<ol class="relative mt-50 space-y-8">
+  {
+    EXPERIENCE.map((experience) => (
+      <li>
+        <ExperienceItem {...experience} />
+      </li>
+    ))
+  }
+</ol>

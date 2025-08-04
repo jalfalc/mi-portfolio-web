@@ -1,0 +1,66 @@
+---
+const navItems = [
+  { title: "Formación", label: "formacion", url: "/#formacion" },
+  { title: "Experiencia", label: "experiencia", url: "/#experiencia" },
+  { title: "Proyectos", label: "proyectos", url: "/#proyectos" },
+  // Para "Sobre mí" lo renderizamos manualmente más abajo para controlar el salto
+];
+---
+
+<header
+  class="fixed top-0 z-10 flex items-center justify-center w-[%] mx-auto mt-2 left-0 right-0"
+>
+  <nav
+    class="flex w-[95%] sm:w-auto px-2 sm:px-5 py-2 text-sm font-medium rounded-full text-gray-200 justify-center items-center bg-gray-800/90 backdrop-blur transition-colors duration-300 space-x-2 mx-auto"
+  >
+    <a
+      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      aria-label="formacion"
+      href="/#formacion"
+    >
+      Formación
+    </a>
+    <a
+      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      aria-label="experiencia"
+      href="/#experiencia"
+    >
+      Experiencia
+    </a>
+    <a
+      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      aria-label="proyectos"
+      href="/#proyectos"
+    >
+      Proyectos
+    </a>
+    <a
+      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      aria-label="sobre-mi"
+      href="/#sobre-mi"
+    >
+      <span class="hidden sm:inline">Sobre mí</span>
+      <span class="inline-block sm:hidden text-center leading-tight">
+        Sobre<br />mí
+      </span>
+    </a>
+  </nav>
+</header>
+
+<style>
+  nav {
+    animation: nav-shadow 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  @keyframes nav-shadow {
+    0% {
+      background-color: rgba(31, 41, 55, 0);
+    }
+    to {
+      box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+      background-color: rgba(31, 41, 55, 0.9);
+    }
+  }
+</style>

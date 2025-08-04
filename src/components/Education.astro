@@ -1,0 +1,31 @@
+---
+import EducationItem from "./EducationItem.astro";
+const EXPERIENCE = [
+  {
+    date: "Septiembre 2024 - Junio 2025",
+    title: "Técnico Superior en Desarrollo de Aplicaciones Web",
+    institution: "IES Enrique Tierno Galván - Parla",
+    description:
+      "Formación en desarrollo web fullstack, combinando el diseño de bases de datos, la implementación de procesos basados en lógica de negocio y la creación de interfaces atractivas que ofrecen soluciones eficientes y escalables.",
+    habilities: "HTML, CSS, JavaScript, Java, PHP, MySQL, Docker, Git",
+  },
+  {
+    date: "Septiembre 2019 - Junio 2021",
+    title: "Técnico Superior en Administración y Finanzas",
+    institution: "IES Alarnes - Getafe",
+    description:
+      "Formación en gestion administrativa, donde aprendí a manejar la contabilidad, la gestión logística, financiera y de recursos humanos. Todo esto mediante el uso de herramientas ofimáticas.",
+    habilities: "Contabilidad, RRHH, Gestión Financiera, Office 365, Contasol",
+  },
+];
+---
+
+<ol class="relative mt-16">
+  {
+    EXPERIENCE.map((experience) => (
+      <li class="">
+        <EducationItem {...experience} />
+      </li>
+    ))
+  }
+</ol>

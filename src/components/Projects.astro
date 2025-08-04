@@ -1,0 +1,126 @@
+---
+// Projects.astro
+import GitHub from "./icons/GitHub.astro";
+import Link from "./icons/Link.astro";
+import SocialPill from "./SocialPill.astro";
+import Html from "./icons/Html.astro";
+import Css from "./icons/Css.astro";
+import Javascript from "./icons/Javascript.astro";
+import Php from "./icons/Php.astro";
+import Mysql from "./icons/Mysql.astro";
+
+const TAGS = {
+  HTML: {
+    name: "HTML",
+    baseClass: "bg-gray-800 text-gray-200",
+    icon: Html,
+    iconColor: "#E34F26",
+  },
+  CSS: {
+    name: "CSS",
+    baseClass: "bg-gray-800 text-gray-200",
+    icon: Css,
+    iconColor: "#1572B6",
+  },
+  JAVASCRIPT: {
+    name: "JavaScript",
+    baseClass: "bg-gray-800 text-gray-200",
+    icon: Javascript,
+    iconColor: "#F7DF1E",
+  },
+  PHP: {
+    name: "PHP",
+    baseClass: "bg-gray-800 text-gray-200",
+    icon: Php,
+    iconColor: "#777BB4",
+  },
+  MYSQL: {
+    name: "MySQL",
+    baseClass: "bg-gray-800 text-gray-200",
+    icon: Mysql,
+    iconColor: "#4479A1",
+  },
+};
+
+const PROJECTS = [
+  {
+    title: "The Beast Barber - Web de citas para clientes de peluquería",
+    description: "Web de citas para clientes de peluquería basada en arquitectura Modelo-Vista-Controlador (MVC). El objetivo es digitalizar el proceso de gestión de citas y mostrar a los clientes los servicios ofrecidos.",
+    link: "https://nuestrosrecuerdos16.wuaze.com/",
+    github: "https://github.com/jalfalc/TFG-TheBeast",
+    image: "/projects/TheBeastBarber.png",
+    tags: [TAGS.HTML, TAGS.CSS, TAGS.JAVASCRIPT, TAGS.PHP, TAGS.MYSQL],
+  },
+];
+---
+
+<div class="flex flex-col gap-y-16">
+  {PROJECTS.map(({ image, title, description, tags, link, github }) => (
+    <article
+      class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0 
+             transition-all duration-300 ease-in-out rounded-xl overflow-hidden 
+             hover:bg-gray-800/50 hover:shadow-2xl"
+    >
+      <div class="w-full md:w-1/2 flex-shrink-0">
+        <div
+          class="relative flex flex-col items-center gap-8 transition duration-500 ease-in-out transform 
+                 shadow-xl overflow-hidden rounded-xl sm:rounded-xl md:group-hover:scale-[1.005] 
+                 lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50"
+        >
+          <img
+            alt={title}
+            class="object-cover object-top w-full h-56 transition-transform duration-500 sm:h-full 
+                   md:group-hover:scale-105"
+            loading="lazy"
+            src={image}
+          />
+        </div>
+      </div>
+
+      <div class="w-full md:w-1/2 md:max-w-lg">
+        <h3 class="text-2xl font-bold text-white group-hover:opacity-100">
+          {title}
+        </h3>
+        <div class="flex flex-wrap mt-2">
+          <ul class="flex flex-wrap mb-2 gap-2">
+            {tags.map((tag) => (
+              <li>
+                <span
+                  class={`flex gap-x-2 items-center rounded-full text-xs ${tag.baseClass} py-1 px-2 
+                         transition-all duration-150 ease-out hover:scale-105`}
+                >
+                  <tag.icon
+                    class="size-4 transition-transform duration-150"
+                    style={`color: ${tag.iconColor}`}
+                  />
+                  {tag.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-2 text-gray-300">{description}</div>
+
+          <div
+            role="group"
+            aria-label="Acciones del proyecto"
+            class="flex flex-wrap mt-4 gap-x-4 gap-y-2 w-full justify-center sm:justify-start"
+          >
+            {github && (
+              <SocialPill href={github} newTab>
+                <GitHub class="size-6" />
+                Código
+              </SocialPill>
+            )}
+            {link && (
+              <SocialPill href={link} newTab>
+                <Link class="size-4" />
+                Ver proyecto
+              </SocialPill>
+            )}
+          </div>
+        </div>
+      </div>
+    </article>
+  ))}
+</div>

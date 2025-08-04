@@ -1,0 +1,160 @@
+---
+// ExperienceItemStackedBottom.astro
+interface Props {
+  title: string;
+  company: string;
+  description: string;
+  date: string;
+  tasks?: string[];
+  technologies?: string[];
+}
+
+const { title, company, description, date, tasks, technologies } = Astro.props;
+---
+
+<div
+  class="w-full bg-gray-800 border border-gray-700 rounded-lg shadow overflow-hidden"
+>
+  <div class="p-5 border-b border-gray-700">
+    <h3 class="font-bold text-white text-base md:text-xl">{title}</h3>
+    <p class="text-sm text-gray-400 mb-1 font-bold">{company}</p>
+    <p class="text-sm text-gray-400">{date}</p>
+  </div>
+
+  <div class="flex flex-col divide-y divide-gray-700">
+    <button
+      type="button"
+      data-tab="info"
+      class="tab-btn flex justify-between items-center px-5 py-4 text-left text-sm font-medium text-yellow-400 bg-gray-900 border-l-4 border-yellow-400 transition"
+      aria-selected="true"
+    >
+      <span>Descripción</span>
+      <svg
+        class="w-4 h-4 transition-transform"
+        data-arrow
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      type="button"
+      data-tab="tasks"
+      class="tab-btn flex justify-between items-center px-5 py-4 text-left text-sm font-medium text-gray-400 hover:bg-gray-900 transition"
+      aria-selected="false"
+    >
+      <span>Tareas</span>
+      <svg
+        class="w-4 h-4 transition-transform"
+        data-arrow
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+    <button
+      type="button"
+      data-tab="tech"
+      class="tab-btn flex justify-between items-center px-5 py-4 text-left text-sm font-medium text-gray-400 hover:bg-gray-900 transition"
+      aria-selected="false"
+    >
+      <span>Tecnologías</span>
+      <svg
+        class="w-4 h-4 transition-transform"
+        data-arrow
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+    </button>
+  </div>
+
+  <div class="p-5 border-t border-gray-700">
+    <div id="info" class="tab-content">
+      <p class="text-gray-300">{description}</p>
+    </div>
+
+    <div id="tasks" class="tab-content hidden">
+      {
+        tasks && tasks.length > 0 ? (
+          <ul class="list-disc pl-5 space-y-2 text-gray-300">
+            {tasks.map((task) => (
+              <li>{task}</li>
+            ))}
+          </ul>
+        ) : (
+          <p class="text-gray-400 italic">No especificado</p>
+        )
+      }
+    </div>
+
+    <div id="tech" class="tab-content hidden">
+      {
+        technologies && technologies.length > 0 ? (
+          <div class="flex flex-wrap gap-2">
+            {technologies.map((tech) => (
+              <span class="px-3 py-1 text-sm font-medium bg-blue-900 text-blue-300 rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p class="text-gray-400 italic">No especificado</p>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons: HTMLElement[] = Array.from(
+      document.querySelectorAll(".tab-btn"),
+    ) as HTMLElement[];
+    const contents: HTMLElement[] = Array.from(
+      document.querySelectorAll(".tab-content"),
+    ) as HTMLElement[];
+
+    function activate(button: HTMLElement) {
+      tabButtons.forEach((b) => {
+        b.classList.remove("text-yellow-400", "border-l-4", "bg-gray-900");
+        b.classList.add("text-gray-400");
+        b.setAttribute("aria-selected", "false");
+        const arrow = b.querySelector("[data-arrow]") as HTMLElement | null;
+        if (arrow) arrow.style.transform = "rotate(0deg)";
+      });
+
+      contents.forEach((c) => c.classList.add("hidden"));
+
+      // activar el seleccionado
+      button.classList.remove("text-gray-400");
+      button.classList.add("text-yellow-400", "border-l-4", "bg-gray-900");
+      button.setAttribute("aria-selected", "true");
+      const arrow = button.querySelector("[data-arrow]") as HTMLElement | null;
+      if (arrow) arrow.style.transform = "rotate(90deg)";
+
+      const target = button.getAttribute("data-tab");
+      const panel = target ? document.getElementById(target) : null;
+      if (panel) panel.classList.remove("hidden");
+    }
+
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => activate(btn));
+    });
+
+    // inicial
+    if (tabButtons[0]) activate(tabButtons[0]);
+  });
+</script>

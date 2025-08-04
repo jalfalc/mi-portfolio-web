@@ -1,0 +1,65 @@
+---
+const personalImageAlt = "Jorge Alfonso Alcalde";
+import Badge from "@/components/Badge.astro";
+import LinkedInIcon from "@/components/icons/LinkedIn.astro";
+import MailIcon from "@/components/icons/Mail.astro";
+import SocialPill from "@/components/SocialPill.astro";
+import PhoneIcon from "./icons/Phone.astro";
+import FileIcon from "@/components/icons/File.astro";
+import GitHubIcon from "@/components/icons/GitHub.astro";
+---
+
+<div class="max-w-xl pt-24">
+  <!-- espacio para que no lo tape el header -->
+  <div class="flex gap-4 mb-4 items-center">
+    <img
+      class="rounded-full shadow-lg w-16 h-22 object-cover"
+      src="/fotoCV.jpg"
+      alt={personalImageAlt}
+    />
+    <a
+      href="https://linkedin.com/in/jorge-alfonso-alcalde-b44457221"
+      target="_blank"
+      rel="noopener"
+      class="flex items-center transition md:justify-center md:hover:scale-105"
+    >
+      <Badge>Disponible para trabajar</Badge>
+    </a>
+  </div>
+  <h1 class="text-4xl font-bold tracking-tight text-white sm:text-5xl">
+    Hola, soy Jorge Alfonso
+  </h1>
+  <p class="mt-6 text-xl text-gray-300">
+    Ubicado en Parla, Madrid (🇪🇸). <strong
+      class="font-semibold text-yellow-300"
+    >
+      Titulado como Técnico Superior en Desarrollo de Aplicaciones Web.
+    </strong>{" "}
+    Enfocado en la creatividad, el trabajo en equipo y el desarrollo personal.
+  </p>
+  <nav class="flex flex-wrap gap-4 mt-8">
+    <SocialPill href="mailto:jorgealfonsoalcalde@gmail.com">
+      <MailIcon class="size-4" />
+      jorgealfonsoalcalde@gmail.com
+    </SocialPill>
+    <SocialPill
+      href="https://www.linkedin.com/in/jorge-alfonso-alcalde-b44457221/"
+      newTab
+    >
+      <LinkedInIcon class="size-4" />
+      LinkedIn
+    </SocialPill>
+    <SocialPill href="https://wa.me/34653490196">
+      <PhoneIcon class="size-4" />
+      653490196
+    </SocialPill>
+    <SocialPill href="/CV_JorgeAlfonsoAlcalde.pdf" newTab>
+      <FileIcon class="size-4" />
+      Ver mi CV
+    </SocialPill>
+    <SocialPill href="https://github.com/jalfalc" newTab>
+      <GitHubIcon class="size-4" />
+      Github
+    </SocialPill>
+  </nav>
+</div>
