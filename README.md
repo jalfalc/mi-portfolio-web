@@ -10,7 +10,7 @@
 
 ## 👋 ¡Hola! Soy Jorge Alfonso Alcalde
 
-🧑‍💻 Desarrollador Web | 📍 Madrid, España | 🎓 25 años
+🧑‍💻 Desarrollador Web | 📍 Madrid, España | 🎓 26 años
 
 Soy una persona **curiosa, proactiva y con gran capacidad de aprendizaje y adaptación**. Me encanta afrontar nuevos retos y trabajar en entornos dinámicos donde pueda seguir creciendo.
 
