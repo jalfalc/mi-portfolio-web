@@ -3,13 +3,13 @@
 interface Props {
   title: string;
   company: string;
-  description: string;
+  descriptions: string[];
   date: string;
   tasks?: string[];
   technologies?: string[];
 }
 
-const { title, company, description, date, tasks, technologies } = Astro.props;
+const { title, company, descriptions, date, tasks, technologies } = Astro.props;
 ---
 
 <div
@@ -82,11 +82,19 @@ const { title, company, description, date, tasks, technologies } = Astro.props;
   </div>
 
   <div class="p-5 border-t border-gray-700">
-    <div id="info" class="tab-content">
-      <p class="text-gray-300">{description}</p>
+    <div class="tab-content infoContainer">
+      {
+        descriptions.length > 0 ? (
+          descriptions.map((description) => (
+            <p class="space-y-2 text-gray-300">{description}</p>
+          )) 
+        ) : (
+            <p class="text-gray-400 italic">No especificado</p>
+          )
+      }
     </div>
 
-    <div id="tasks" class="tab-content hidden">
+    <div class="tab-content hidden tasksContainer">
       {
         tasks && tasks.length > 0 ? (
           <ul class="list-disc pl-5 space-y-2 text-gray-300">
@@ -100,7 +108,7 @@ const { title, company, description, date, tasks, technologies } = Astro.props;
       }
     </div>
 
-    <div id="tech" class="tab-content hidden">
+    <div class="tab-content hidden techContainer">
       {
         technologies && technologies.length > 0 ? (
           <div class="flex flex-wrap gap-2">
