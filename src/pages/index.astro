@@ -19,11 +19,11 @@ import Education from "@/components/Education.astro"
   description="Bienvenido a mi portfolio, donde encontrarás información sobre mi formación, experiencia laboral, proyectos y un poco más sobre mí. Disponible para trabajar en proyectos interesantes y desafiantes."
 >
   <main class="px-4">
-    <SectionContainer class="py-16 md:py-36">
+    <SectionContainer class="py-16">
       <Hero>
     </SectionContainer>
-    <div class="space-y-24">
-    <SectionContainer id="formacion">
+    <div class="py-20">
+    <SectionContainer id="formacion" class="mt-10">
       <TitleSection>
         <StudiesIcon class="size-8" />
         Formación
@@ -31,7 +31,7 @@ import Education from "@/components/Education.astro"
       <Education />
     </SectionContainer>
 
-    <SectionContainer id="experiencia">
+    <SectionContainer id="experiencia" class="mt-10">
       <TitleSection>
         <Briefcase class="size-8" />
         Experiencia laboral
@@ -39,7 +39,7 @@ import Education from "@/components/Education.astro"
       <Experience />
     </SectionContainer>
 
-    <SectionContainer id="proyectos">
+    <SectionContainer id="proyectos" class="mt-10">
       <TitleSection>
         <CodeIcon class="size-7" />
         Proyectos
@@ -47,7 +47,7 @@ import Education from "@/components/Education.astro"
       <Projects />
     </SectionContainer>
 
-    <SectionContainer id="sobre-mi">
+    <SectionContainer id="sobre-mi" class="mt-10">
       <TitleSection>
         <ProfileCheck class="size-8" />
         Sobre mí
