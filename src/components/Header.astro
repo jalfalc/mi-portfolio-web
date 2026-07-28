@@ -3,39 +3,31 @@ const navItems = [
   { title: "Formación", label: "formacion", url: "/#formacion" },
   { title: "Experiencia", label: "experiencia", url: "/#experiencia" },
   { title: "Proyectos", label: "proyectos", url: "/#proyectos" },
-  // Para "Sobre mí" lo renderizamos manualmente más abajo para controlar el salto
+  // Para "Sobre mí" lo renderizamos manualmente más abajo para controlar el salto ya que tiene "dos partes" el title
 ];
+const navItemClass = "block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400";
 ---
 
 <header
-  class="fixed top-0 z-10 flex items-center justify-center w-[%] mx-auto mt-2 left-0 right-0"
+  class="fixed top-0 z-10 flex items-center justify-center mx-auto mt-2 left-0 right-0"
 >
   <nav
     class="flex w-[95%] sm:w-auto px-2 sm:px-5 py-2 text-sm font-medium rounded-full text-gray-200 justify-center items-center bg-gray-800/90 backdrop-blur transition-colors duration-300 space-x-2 mx-auto"
   >
+    {
+      navItems.map((item) => (
+        <a
+          class={navItemClass}
+          aria-label={item.label}
+          href={item.url}
+        >
+          {item.title}
+        </a>
+      ))
+    }
+  
     <a
-      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-      aria-label="formacion"
-      href="/#formacion"
-    >
-      Formación
-    </a>
-    <a
-      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-      aria-label="experiencia"
-      href="/#experiencia"
-    >
-      Experiencia
-    </a>
-    <a
-      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
-      aria-label="proyectos"
-      href="/#proyectos"
-    >
-      Proyectos
-    </a>
-    <a
-      class="block px-3 py-2 rounded-md transition-colors text-gray-200 hover:text-yellow-400 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+      class={navItemClass}
       aria-label="sobre-mi"
       href="/#sobre-mi"
     >
@@ -44,6 +36,7 @@ const navItems = [
         Sobre<br />mí
       </span>
     </a>
+     
   </nav>
 </header>
 
