@@ -13,7 +13,7 @@ const { title, company, descriptions, date, tasks, technologies } = Astro.props;
 ---
 
 <div
-  class="w-full bg-gray-800 border border-gray-700 rounded-lg shadow overflow-hidden"
+  class="w-full bg-gray-800 border border-gray-700 rounded-lg shadow overflow-hidden experience-item"
 >
   <div class="p-5 border-b border-gray-700">
     <h3 class="font-bold text-white text-base md:text-xl">{title}</h3>
@@ -82,19 +82,19 @@ const { title, company, descriptions, date, tasks, technologies } = Astro.props;
   </div>
 
   <div class="p-5 border-t border-gray-700">
-    <div class="tab-content infoContainer">
+    <div data-panel="info" class="tab-content">
       {
         descriptions.length > 0 ? (
           descriptions.map((description) => (
-            <p class="space-y-2 text-gray-300">{description}</p>
-          )) 
+            <p class="space-y-2 text-gray-300 pb-2">{description}</p>
+          ))
         ) : (
-            <p class="text-gray-400 italic">No especificado</p>
-          )
+          <p class="text-gray-400 italic">No especificado</p>
+        )
       }
     </div>
 
-    <div class="tab-content hidden tasksContainer">
+    <div data-panel="tasks" class="tab-content hidden">
       {
         tasks && tasks.length > 0 ? (
           <ul class="list-disc pl-5 space-y-2 text-gray-300">
@@ -108,7 +108,7 @@ const { title, company, descriptions, date, tasks, technologies } = Astro.props;
       }
     </div>
 
-    <div class="tab-content hidden techContainer">
+    <div data-panel="tech" class="tab-content hidden">
       {
         technologies && technologies.length > 0 ? (
           <div class="flex flex-wrap gap-2">
@@ -128,41 +128,64 @@ const { title, company, descriptions, date, tasks, technologies } = Astro.props;
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const tabButtons: HTMLElement[] = Array.from(
-      document.querySelectorAll(".tab-btn"),
+    const experienceContainers: HTMLElement[] = Array.from(
+      document.querySelectorAll(".experience-item"),
     ) as HTMLElement[];
-    const contents: HTMLElement[] = Array.from(
-      document.querySelectorAll(".tab-content"),
-    ) as HTMLElement[];
+    function activate(button: HTMLButtonElement, experienceContainer: HTMLElement) {
+      const BUTTON_CLASS = "tab-btn";
+      if (button.classList.contains(BUTTON_CLASS)) {
+        // Recupero botones del container
+        const tabButtons: HTMLElement[] = Array.from(
+          experienceContainer.querySelectorAll(".tab-btn"),
+        ) as HTMLElement[];
 
-    function activate(button: HTMLElement) {
-      tabButtons.forEach((b) => {
-        b.classList.remove("text-yellow-400", "border-l-4", "bg-gray-900");
-        b.classList.add("text-gray-400");
-        b.setAttribute("aria-selected", "false");
-        const arrow = b.querySelector("[data-arrow]") as HTMLElement | null;
-        if (arrow) arrow.style.transform = "rotate(0deg)";
-      });
+        // Recupero contents del container
+        const contents: HTMLElement[] = Array.from(
+          experienceContainer.querySelectorAll(".tab-content"),
+        ) as HTMLElement[];
+        tabButtons.forEach((b) => {
+          b.classList.remove("text-yellow-400", "border-l-4", "bg-gray-900");
+          b.classList.add("text-gray-400");
+          b.setAttribute("aria-selected", "false");
+          const arrow = b.querySelector("[data-arrow]") as HTMLElement | null;
+          if (arrow) arrow.style.transform = "rotate(0deg)";
+        });
 
-      contents.forEach((c) => c.classList.add("hidden"));
+        contents.forEach((c) => c.classList.add("hidden"));
+        // activar el seleccionado
+        button.classList.remove("text-gray-400");
+        button.classList.add("text-yellow-400", "border-l-4", "bg-gray-900");
+        button.setAttribute("aria-selected", "true");
+        const arrow = button.querySelector(
+          "[data-arrow]",
+        ) as HTMLElement | null;
+        if (arrow) arrow.style.transform = "rotate(90deg)";
 
-      // activar el seleccionado
-      button.classList.remove("text-gray-400");
-      button.classList.add("text-yellow-400", "border-l-4", "bg-gray-900");
-      button.setAttribute("aria-selected", "true");
-      const arrow = button.querySelector("[data-arrow]") as HTMLElement | null;
-      if (arrow) arrow.style.transform = "rotate(90deg)";
-
-      const target = button.getAttribute("data-tab");
-      const panel = target ? document.getElementById(target) : null;
-      if (panel) panel.classList.remove("hidden");
+        const target = button.getAttribute("data-tab");
+        const panel = target
+          ? experienceContainer.querySelector(`[data-panel="${target}"]`)
+          : null;
+        if (panel) panel.classList.remove("hidden");
+      }
     }
 
-    tabButtons.forEach((btn) => {
-      btn.addEventListener("click", () => activate(btn));
+    experienceContainers.forEach((element) => {
+      element.addEventListener("click", (event) => {
+        if (event.target instanceof Element) {
+          const elementItem = event.target.closest(".experience-item");
+          activate(event.target as HTMLButtonElement, elementItem as HTMLElement);
+        }
+      });
     });
 
-    // inicial
-    if (tabButtons[0]) activate(tabButtons[0]);
+    // Para dejar seleccionado "descripción" en todos los experienceContainer de manera inicial
+    if (experienceContainers) {
+      experienceContainers.forEach((container) => {
+        // Obtengo los botones del container que recorro
+        const containerButtons = container.querySelectorAll(".tab-btn");
+        // Ejecuto la función activate pasando el primer boton (que activa "descripción") y su experienceContainer
+        activate(containerButtons[0] as HTMLButtonElement, container);
+      });
+    }
   });
 </script>
